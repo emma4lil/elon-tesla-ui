@@ -29,10 +29,6 @@ const BybitDarkTheme: ThemeTypes = {
     // Vibrant Text Colors
     darkText: '#FFFFFF',       // Pure white (primary text)
     lightText: '#E9E9E9',      // Soft white (secondary text)
-    infoText: '#5D9EFF',       // Bright info blue
-    successText: '#00FFA8',    // Electric success green
-    warningText: '#FFE600',    // Vibrant warning yellow
-    errorText: '#FF4D7D',      // Hot error pink
 
     // Dark Variants
     darkprimary: '#E8C34A',    // Darker yellow
@@ -52,14 +48,8 @@ const BybitDarkTheme: ThemeTypes = {
 
     // Grayscale
     gray100: '#2D2D3A',
-    gray200: '#474D57',
     primary200: '#F8E8A0',      // Light yellow
-    secondary200: '#3E3E4B',    // Light slate
-
-    // Special Bybit Colors
-    'bybit-yellow': '#FCD535',
-    'bybit-dark': '#0B0E11',
-    'bybit-panel': '#1E2329'
+    secondary200: '#3E3E4B',    // Light slat
   }
 };
 
