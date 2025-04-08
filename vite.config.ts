@@ -33,5 +33,10 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['vuetify'],
     entries: ['./src/**/*.vue']
-  }
+  },
+  server: {
+    hmr: {
+      overlay: false,
+    },
+  },
 });
