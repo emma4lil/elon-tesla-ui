@@ -1,8 +1,8 @@
 {
-  "name": "berry-free-vuetify-vuejs-admin-template",
+  "name": "elon tesla",
   "version": "1.3.0",
   "private": true,
-  "author": "CodedThemes",
+  "author": "regexcoder",
   "type": "module",
   "scripts": {
     "dev": "vite",
