@@ -4,6 +4,8 @@ import { icons } from './mdi-icon'; // Import icons from separate file
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import { PurpleTheme } from '@/theme/LightTheme';
+import {DarkPurpleTheme} from '@/theme/DarkThemePurple.ts';
+import {BybitDarkTheme} from '@/theme/BybitsTheme.ts';
 
 export default createVuetify({
   components,
@@ -19,9 +21,9 @@ export default createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'PurpleTheme',
+    defaultTheme: 'BybitDarkTheme',
     themes: {
-      PurpleTheme
+      BybitDarkTheme
     }
   },
   defaults: {

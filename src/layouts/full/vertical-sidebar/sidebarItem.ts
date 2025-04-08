@@ -8,7 +8,11 @@ import {
   BugIcon,
   DashboardIcon,
   BrandChromeIcon,
-  HelpIcon
+  HelpIcon,
+  CashBanknoteIcon,
+  CashBanknoteOffIcon,
+  BrandSuperhumanIcon
+
 } from 'vue-tabler-icons';
 
 export interface menu {
@@ -26,8 +30,38 @@ export interface menu {
   type?: string;
   subCaption?: string;
 }
+const sidebarItems: menu[] = [
+  { header: 'Dashboard' },
+  {
+    title: 'Trade',
+    icon: DashboardIcon,
+    to: '/dashboard/default'
+  },
+  {
+    title: 'Active Orders',
+    icon: CircleIcon,
+    to: '/dashboard/orders',
+  },
+  {header: 'Accounts'},
+  {
+    title: 'Withdraw',
+    icon: CashBanknoteIcon,
+    to: '/accounts/withdraw'
+  },
+  {
+    title: 'Deposit',
+    icon: CashBanknoteOffIcon,
+    to: '/accounts/deposit'
+  },
+  {
+    title: "KYC",
+    icon: BrandSuperhumanIcon,
+    to: '/accounts/kyc'
+  }
+]
 
 const sidebarItem: menu[] = [
+  ...sidebarItems,
   { header: 'Dashboard' },
   {
     title: 'Default',

@@ -4,6 +4,7 @@ import Google from '@/assets/images/auth/social-google.svg';
 const checkbox = ref(false);
 const show1 = ref(false);
 const password = ref('');
+const confirmPassword = ref('');
 const email = ref('');
 const Regform = ref();
 const firstname = ref('');
@@ -20,18 +21,7 @@ function validate() {
 </script>
 
 <template>
-  <v-btn block color="primary" variant="outlined" class="text-lightText googleBtn">
-    <img :src="Google" alt="google" />
-    <span class="ml-2">Sign up with Google</span></v-btn
-  >
-  <v-row>
-    <v-col class="d-flex align-center">
-      <v-divider class="custom-devider" />
-      <v-btn variant="outlined" class="orbtn" rounded="md" size="small">OR</v-btn>
-      <v-divider class="custom-devider" />
-    </v-col>
-  </v-row>
-  <h5 class="text-h5 text-center my-4 mb-8">Sign up with Email address</h5>
+  <h5 class="text-h4 text-center my-4 mb-8">Sign up with Email address</h5>
   <v-form ref="Regform" lazy-validation action="/dashboards/analytical" class="mt-7 loginForm">
     <v-row>
       <v-col cols="12" sm="6">
@@ -79,6 +69,20 @@ function validate() {
       :type="show1 ? 'text' : 'password'"
       @click:append="show1 = !show1"
       class="pwdInput"
+    ></v-text-field>
+    <v-text-field
+      v-model="confirmPassword"
+      :rules="passwordRules"
+      label="Confirm Password"
+      required
+      density="comfortable"
+      variant="outlined"
+      color="primary"
+      hide-details="auto"
+      :append-icon="show1 ? '$eye' : '$eyeOff'"
+      :type="show1 ? 'text' : 'password'"
+      @click:append="show1 = !show1"
+      class="pwdInput mt-4"
     ></v-text-field>
 
     <div class="d-sm-inline-flex align-center mt-2 mb-7 mb-sm-0 font-weight-bold">

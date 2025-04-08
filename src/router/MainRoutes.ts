@@ -3,7 +3,7 @@ const MainRoutes = {
   meta: {
     requiresAuth: true
   },
-  redirect: '/main/dashboard/default',
+  redirect: '/dashboard/default',
   component: () => import('@/layouts/full/FullLayout.vue'),
   children: [
     {
@@ -15,6 +15,11 @@ const MainRoutes = {
       name: 'Default',
       path: '/dashboard/default',
       component: () => import('@/views/dashboards/default/DefaultDashboard.vue')
+    },
+    {
+      name: 'Active Orders',
+      path: '/dashboard/orders',
+      component: () => import('@/views/accounts/orderhistory/OrderView.vue')
     },
     {
       name: 'Starter',
