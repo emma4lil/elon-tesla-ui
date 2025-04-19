@@ -1,15 +1,11 @@
 <template>
-  <div class="logo d-flex">
-    <img src="../../../assets/footerlogo.png" height="37" width="55" /><span>ElonTesla</span>
-  </div>
+  <v-card max-width="100" variant="text" to="/" class="logo d-flex">
+    <img  src="../../../assets/footerlogo.png" height="37" width="55" /><span>ElonTesla</span>
+  </v-card>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
 
-const primary = ref('rgb(var(--v-theme-primary))');
-const secondary = ref('rgb(var(--v-theme-secondary))');
 </script>
 
 <style scoped>

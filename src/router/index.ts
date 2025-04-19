@@ -17,11 +17,10 @@ export const router = createRouter({
   ]
 });
 
-interface User {
+export interface User {
   // Define the properties and their types for the user data here
   // For example:
-  id: number;
-  name: string;
+  [key: string]: any; // Allow additional properties
 }
 
 // Assuming you have a type/interface for your authentication store

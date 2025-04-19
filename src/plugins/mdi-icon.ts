@@ -1,4 +1,17 @@
-import { mdiClose, mdiHome, mdiEyeOff, mdiEye, mdiFacebook,mdiCog, mdiTwitter, mdiInstagram, mdiLinkedin, mdiGoogle, mdiYoutube } from '@mdi/js';
+import {
+  mdiClose,
+  mdiHome,
+  mdiEyeOff,
+  mdiEye,
+  mdiFacebook,
+  mdiCog,
+  mdiTwitter,
+  mdiInstagram,
+  mdiLinkedin,
+  mdiGoogle,
+  mdiYoutube,
+  mdiMonitorDashboard, mdiLogin
+} from '@mdi/js';
 
 export const icons = {
   close: mdiClose,
@@ -12,4 +25,6 @@ export const icons = {
   google: mdiGoogle,
   youtube: mdiYoutube,
   cog: mdiCog,
+  dashboard: mdiMonitorDashboard,
+  login: mdiLogin
 };

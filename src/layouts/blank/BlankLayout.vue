@@ -1,6 +1,7 @@
 // ===============================|| Blank Layout ||=============================== //
 <template>
   <v-app>
+    <NavBarBlank/>
     <RouterView />
   </v-app>
 </template>
@@ -8,6 +9,7 @@
 import { RouterView } from 'vue-router';
 import { onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth.ts';
+import NavBarBlank from '@/layouts/blank/NavBarBlank.vue';
 
 const auth = useAuthStore();
 onMounted(async () => {

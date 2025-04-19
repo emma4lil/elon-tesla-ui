@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { supabase } from '@/superbase.ts';
 import { router } from '@/router';
 import LogoDark from '@/layouts/full/logo/LogoDark.vue';
-const showRegAlert = ref(true);
+const showRegAlert = ref(false);
 const loading = ref(false);
 
 const checkbox = ref(false);
