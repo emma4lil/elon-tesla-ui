@@ -15,7 +15,7 @@ const items = shallowRef([
   <v-card elevation="0" class="overflow-hidden bubble-shape bubble-secondary-shape">
     <v-card-text>
       <h3 class="text-h3 font-weight-medium">
-        $123.00 <a href="#"><CircleArrowUpRightIcon stroke-width="1.5" width="28" class="text-white" /> </a>
+        $0.00 <a href="#"><CircleArrowUpRightIcon stroke-width="1.5" width="28" class="text-white" /> </a>
       </h3>
       <span class="text-subtitle-1 text-medium-emphasis primary">Total Balance</span>
     </v-card-text>

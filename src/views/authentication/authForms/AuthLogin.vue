@@ -25,6 +25,7 @@ function validate(values: any, { setErrors }: any) {
 </script>
 
 <template>
+
   <Form @submit="validate" class="mt-7 loginForm" v-slot="{ errors, isSubmitting }">
     <v-text-field
       v-model="username"

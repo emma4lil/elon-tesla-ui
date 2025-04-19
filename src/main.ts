@@ -12,13 +12,19 @@ import { fakeBackend } from '@/utils/helpers/fake-backend';
 
 // print
 import print from 'vue3-print-nb';
+import { useAuthStore } from '@/stores/auth.ts';
 
 const app = createApp(App);
 fakeBackend();
+app.use(createPinia());
+const auth = useAuthStore()
+await auth.onInit()
 app.use(router);
 app.use(PerfectScrollbarPlugin);
-app.use(createPinia());
 app.use(VueTablerIcons);
 app.use(print);
 app.use(VueApexCharts);
+
+
 app.use(vuetify).mount('#app');
+

@@ -4,8 +4,10 @@ import VerticalSidebarVue from './vertical-sidebar/VerticalSidebar.vue';
 import VerticalHeaderVue from './vertical-header/VerticalHeader.vue';
 import Customizer from './customizer/CustomizerPanel.vue';
 import FooterPanel from './footer/FooterPanel.vue';
-import { useCustomizerStore } from '../../stores/customizer';
+import { useCustomizerStore } from '@/stores/customizer.ts';
+
 const customizer = useCustomizerStore();
+
 </script>
 
 <template>

@@ -5,7 +5,8 @@ import { useAuthStore } from '@/stores/auth';
 
 const swt1 = ref(true);
 const swt2 = ref(false);
-const authStore = useAuthStore();
+const auth = useAuthStore();
+const user = auth.user?.user_metadata;
 </script>
 
 <template>
@@ -13,8 +14,8 @@ const authStore = useAuthStore();
   <!-- profile DD -->
   <!-- ---------------------------------------------- -->
   <div class="pa-4">
-    <h4 class="mb-n1">Good Morning, <span class="font-weight-regular">John Doe</span></h4>
-    <span class="text-subtitle-2 text-medium-emphasis">Project admin</span>
+    <h4 class="mb-n1">Hello, <span class="font-weight-regular">{{ user.first_name }} {{ user.last_name }}</span></h4>
+    <span class="text-subtitle-2 text-medium-emphasis"></span>
 
     <v-text-field persistent-placeholder placeholder="Search" class="my-3" color="primary" variant="outlined" hide-details>
       <template v-slot:prepend-inner>
@@ -26,8 +27,8 @@ const authStore = useAuthStore();
     <perfect-scrollbar style="height: calc(100vh - 300px); max-height: 515px">
       <div class="bg-lightwarning rounded-md pa-5 my-3 circle sm-circle lg-circle">
         <h4>Upgrade your plan</h4>
-        <h6 class="text-subtitle-2 text-medium-emphasis mr-11 pr-11 mb-3 mt-2">70% discount for 1 years subscriptions.</h6>
-        <v-btn color="warning" variant="flat" target="_" href="https://codedthemes.com/item/berry-vue-admin-dashboard/"> Go Premium </v-btn>
+        <h6 class="text-subtitle-2 text-medium-emphasis mr-11 pr-11 mb-3 mt-2">Make your first deposit and enjoy $50! in bonuses.</h6>
+        <v-btn to="/accounts/deposit" color="warning" variant="flat" target="_"> Deposit now! </v-btn>
       </div>
 
       <v-divider></v-divider>
@@ -70,7 +71,7 @@ const authStore = useAuthStore();
           </template>
         </v-list-item>
 
-        <v-list-item @click="authStore.logout()" color="secondary" rounded="md">
+        <v-list-item @click="auth.logout()" color="secondary" rounded="md">
           <template v-slot:prepend>
             <LogoutIcon size="20" class="mr-2" />
           </template>

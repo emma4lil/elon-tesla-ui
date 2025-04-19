@@ -21,8 +21,10 @@ export default createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'BybitDarkTheme',
+    defaultTheme: 'PurpleTheme',
     themes: {
+      PurpleTheme,
+      DarkPurpleTheme,
       BybitDarkTheme
     }
   },

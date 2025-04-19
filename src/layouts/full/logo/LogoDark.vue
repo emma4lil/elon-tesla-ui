@@ -1,6 +1,6 @@
 <template>
-  <div class="logo text-center">
-      <span class="">Elon Tesla Stock Trade</span>
+  <div class="logo d-flex">
+    <img src="../../../assets/footerlogo.png" height="37" width="55" /><span>ElonTesla</span>
   </div>
 </template>
 

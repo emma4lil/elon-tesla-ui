@@ -9,6 +9,10 @@
         </div>
         <Depositor/>
       </v-col>
+
+      <v-col>
+        <MultiBalance />
+      </v-col>
     </v-row>
 
     <!-- Deposit Dialog -->
@@ -122,6 +126,7 @@
 <script setup>
 import { ref } from 'vue';
 import Depositor from '@/views/dashboards/default/components/Depositor.vue';
+import MultiBalance from '@/views/dashboards/default/components/MultiBalance.vue';
 
 // State
 const currentBalance = ref(0);

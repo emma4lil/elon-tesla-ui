@@ -13,7 +13,7 @@ export const router = createRouter({
     },
     MainRoutes,
     PublicRoutes,
-    AccountRoutes,
+    AccountRoutes
   ]
 });
 
@@ -28,7 +28,9 @@ interface User {
 interface AuthStore {
   user: User | null;
   returnUrl: string | null;
+
   login(username: string, password: string): Promise<void>;
+
   logout(): void;
 }
 
@@ -39,7 +41,7 @@ router.beforeEach(async (to, from, next) => {
 
   const isPublicPage = publicPages.includes(to.path);
   const authRequired = !isPublicPage && to.matched.some((record) => record.meta.requiresAuth);
-
+  console.log('Auth:', auth.user);
   // User not logged in and trying to access a restricted page
   if (authRequired && !auth.user) {
     auth.returnUrl = to.fullPath; // Save the intended page

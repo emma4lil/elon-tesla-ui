@@ -19,7 +19,6 @@ import OrderView from '@/components/shared/OrderView.vue';
         <CrptoMarquee />
       </v-card>
     </v-col>
-
     <!--row 2-->
     <v-col cols="12" md="8" class="red">
       <v-row>

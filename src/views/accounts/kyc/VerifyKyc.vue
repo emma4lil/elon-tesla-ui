@@ -1,292 +1,264 @@
 <template>
-  <v-container v-if="mounted" class="max-width-800">
-    <v-stepper v-model="step" :items="steps" hide-actions>
-      <v-stepper-window>
-        <!-- Step 1: Document Upload -->
-        <v-stepper-window-item :value="1">
-          <v-card title="Identity Verification" subtitle="Step 1 of 3" flat>
-            <v-card-text>
-              <v-alert type="info" variant="tonal" class="mb-6">
-                Please upload a clear photo of your government-issued ID
-              </v-alert>
+  <v-container class="my-8" fluid>
+    <v-card class="mx-auto" max-width="1000">
+      <v-card-title class="text-h5 bg-deep-purple bg-deep-orange white--text pa-4">
+        KYC Verification
+      </v-card-title>
 
-              <v-file-input
-                v-model="idDocument"
-                label="ID Document"
-                accept="image/*,.pdf"
-                prepend-icon="mdi-account-card-details"
-                :rules="fileRules"
-                required
-                class="mb-4"
-                clearable
-                @update:modelValue="validateStep1"
-              ></v-file-input>
+      <v-card-text class="pa-6">
+        <template v-if="verificationStatus === 'pending'">
+          <v-alert type="info" class="mb-6">
+            Your verification is pending approval. We'll notify you once it's completed.
+          </v-alert>
+          <div class="d-flex justify-space-between">
+            <v-btn color="primary" @click="resetForm">Submit Another Document</v-btn>
+            <v-btn color="secondary" @click="checkStatus">Check Status</v-btn>
+          </div>
+        </template>
 
-              <v-file-input
-                v-model="selfieWithId"
-                label="Selfie with ID"
-                accept="image/*"
-                prepend-icon="mdi-camera-account"
-                :rules="fileRules"
-                required
-                hint="Take a selfie holding your ID next to your face"
-                persistent-hint
-                clearable
-                @update:modelValue="validateStep1"
-              ></v-file-input>
-            </v-card-text>
+        <template v-else-if="verificationStatus === 'approved'">
+          <v-alert type="success" class="mb-6">
+            <v-icon left>mdi-check-circle</v-icon>
+            Your KYC verification has been approved!
+          </v-alert>
+        </template>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                @click="step = 2"
-                :disabled="!canProceedToStep2"
-              >
-                Continue
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-stepper-window-item>
+        <template v-else-if="verificationStatus === 'rejected'">
+          <v-alert type="error" class="mb-6">
+            <v-icon left>mdi-alert-circle</v-icon>
+            Your KYC verification was rejected. Reason: {{ rejectionReason }}
+          </v-alert>
+          <v-btn color="primary" @click="resetForm">Try Again</v-btn>
+        </template>
 
-        <!-- Step 2: Personal Details -->
-        <v-stepper-window-item :value="2">
-          <v-card title="Personal Details" subtitle="Step 2 of 3" flat>
-            <v-card-text>
-              <v-row>
-                <v-col cols="12" md="6">
-                  <v-text-field
-                    v-model="form.firstName"
-                    label="First Name"
-                    :rules="nameRules"
-                    required
-                    @update:modelValue="validateStep2"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6">
-                  <v-text-field
-                    v-model="form.lastName"
-                    label="Last Name"
-                    :rules="nameRules"
-                    required
-                    @update:modelValue="validateStep2"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
+        <template v-else>
+          <p class="mb-6">
+            To complete your KYC verification, please upload a clear photo of your government-issued ID
+            (Passport, Driver's License, or National ID).
+          </p>
 
-              <v-text-field
-                v-model="form.idNumber"
-                label="ID Number"
-                :rules="idRules"
-                required
-                class="mb-4"
-                @update:modelValue="validateStep2"
-              ></v-text-field>
+          <v-form ref="form" v-model="valid" @submit.prevent="submitForm">
+            <v-select
+              variant="outlined"
+              v-model="idType"
+              :items="idTypes"
+              label="ID Type"
+              :rules="[v => !!v || 'ID type is required']"
+              required
+              outlined
+              class="mb-4"
+            ></v-select>
 
-              <v-select
-                v-model="form.idType"
-                label="ID Type"
-                :items="idTypes"
-                :rules="[v => !!v || 'ID type is required']"
-                required
-                @update:modelValue="validateStep2"
-              ></v-select>
+            <v-file-input
+              variant="outlined"
+              v-model="idFront"
+              label="Front of ID"
+              accept="image/*,.pdf"
+              required
+              outlined
+              prepend-icon="mdi-camera"
+              class="mb-4"
+              @change="previewFrontImage"
+            ></v-file-input>
 
-              <v-text-field
-                v-model="form.dob"
-                label="Date of Birth"
-                type="date"
-                :max="maxDate"
-                :rules="[v => !!v || 'Date of birth is required']"
-                required
-                class="mt-4"
-                @update:modelValue="validateStep2"
-              ></v-text-field>
-            </v-card-text>
+            <v-img
+              v-if="frontPreview"
+              :src="frontPreview"
+              max-height="200"
+              contain
+              class="mb-4"
+            ></v-img>
 
-            <v-card-actions>
-              <v-btn variant="text" @click="step = 1">Back</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                @click="step = 3"
-                :disabled="!isStep2Valid"
-              >
-                Continue
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-stepper-window-item>
+            <v-file-input
+              variant="outlined"
+              v-model="idBack"
+              label="Back of ID (if applicable)"
+              accept="image/*,.pdf"
+              outlined
+              prepend-icon="mdi-camera"
+              class="mb-4"
+              @change="previewBackImage"
+            ></v-file-input>
 
-        <!-- Step 3: Confirmation -->
-        <v-stepper-window-item :value="3">
-          <template v-if="!submitted">
-            <v-card title="Confirm Your Information" subtitle="Step 3 of 3" flat>
-              <v-card-text>
-                <v-alert type="warning" variant="tonal" class="mb-6">
-                  Please verify all information is correct before submitting
-                </v-alert>
+            <v-img
+              v-if="backPreview"
+              :src="backPreview"
+              max-height="200"
+              contain
+              class="mb-4"
+            ></v-img>
 
-                <div class="mb-6">
-                  <div class="text-subtitle-1 mb-2">Document Uploads:</div>
-                  <v-chip v-if="idDocument.length > 0" class="ma-1" prepend-icon="mdi-file">
-                    {{ idDocument[0].name }}
-                  </v-chip>
-                  <v-chip v-if="selfieWithId.length > 0" class="ma-1" prepend-icon="mdi-image">
-                    {{ selfieWithId[0].name }}
-                  </v-chip>
-                </div>
+            <v-checkbox
+              v-model="consent"
+              :rules="[v => !!v || 'You must agree to continue']"
+              label="I certify that this is a valid government-issued ID and the information is accurate."
+              required
+            ></v-checkbox>
 
-                <v-divider class="my-4"></v-divider>
-
-                <div class="text-subtitle-1 mb-2">Personal Information:</div>
-                <v-table density="compact">
-                  <tbody>
-                  <tr>
-                    <td>Full Name:</td>
-                    <td>{{ form.firstName }} {{ form.lastName }}</td>
-                  </tr>
-                  <tr>
-                    <td>ID Type:</td>
-                    <td>{{ form.idType }}</td>
-                  </tr>
-                  <tr>
-                    <td>ID Number:</td>
-                    <td>{{ form.idNumber }}</td>
-                  </tr>
-                  <tr>
-                    <td>Date of Birth:</td>
-                    <td>{{ formatDate(form.dob) }}</td>
-                  </tr>
-                  </tbody>
-                </v-table>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-btn variant="text" @click="step = 2">Back</v-btn>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" @click="submitKyc" :loading="loading">
-                  Submit Verification
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </template>
-
-          <template v-else>
-            <v-card title="Verification Submitted" flat>
-              <v-card-text>
-                <v-alert type="success" variant="tonal" class="mb-6">
-                  <template v-slot:prepend>
-                    <v-icon size="large">mdi-check-circle</v-icon>
-                  </template>
-                  <div class="text-h6">KYC verification submitted!</div>
-                  <div>Your documents are pending verification.</div>
-                </v-alert>
-
-                <v-card variant="outlined" class="mb-4">
-                  <v-card-text>
-                    <div class="d-flex align-center mb-2">
-                      <v-icon color="info" class="mr-2">mdi-clock-outline</v-icon>
-                      <span class="text-subtitle-1">Verification Status: Pending</span>
-                    </div>
-                  </v-card-text>
-                </v-card>
-
-                <div class="text-center mt-6">
-                  <v-btn color="primary" to="/dashboard">Return to Dashboard</v-btn>
-                </div>
-              </v-card-text>
-            </v-card>
-          </template>
-        </v-stepper-window-item>
-      </v-stepper-window>
-    </v-stepper>
+            <v-btn
+              type="submit"
+              color="primary"
+              :loading="loading"
+              :disabled="!valid || loading"
+              block
+              large
+            >
+              Submit for Verification
+            </v-btn>
+          </v-form>
+        </template>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 
-const mounted = ref(false);
-const step = ref(1);
-const submitted = ref(false);
+const form = ref(null);
+const valid = ref(false);
 const loading = ref(false);
-const idDocument = ref<File[]>([]);
-const selfieWithId = ref<File[]>([]);
+const verificationStatus = ref('unverified');
+const rejectionReason = ref('');
 
-const steps = ['Identity Verification', 'Details', 'Confirmation'];
-const idTypes = ['Passport', 'Driver License', 'National ID'];
-const maxDate = new Date().toISOString().split('T')[0];
+const idType = ref('');
+const idTypes = ref([
+  'Passport',
+  'Driver License',
+  'National ID',
+  'Residence Permit',
+  'Other Government ID'
+]);
 
-const form = ref({
-  firstName: '',
-  lastName: '',
-  idNumber: '',
-  idType: '',
-  dob: ''
-});
+const idFront = ref(null);
+const idBack = ref(null);
+const consent = ref(false);
 
-// Validation rules
-const fileRules = [
-  (v: File[]) => (v && v.length > 0) || 'File is required',
-  (v: File[]) => !v[0] || v[0].size < 5000000 || 'File size should be less than 5 MB'
-];
+const frontPreview = ref(null);
+const backPreview = ref(null);
 
-const nameRules = [
-  (v: string) => !!v || 'Name is required',
-  (v: string) => (v && v.length >= 2) || 'Name must be at least 2 characters'
-];
-
-const idRules = [
-  (v: string) => !!v || 'ID number is required',
-  (v: string) => (v && v.length >= 4) || 'ID number must be at least 4 characters'
-];
-
-// Validation states
-const step1Valid = ref(false);
-const step2Valid = ref(false);
-
-const validateStep1 = () => {
-  step1Valid.value = idDocument.value.length > 0 && selfieWithId.value.length > 0;
+const previewFrontImage = (file) => {
+  if (!file) {
+    frontPreview.value = null;
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    frontPreview.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
 };
 
-const validateStep2 = () => {
-  step2Valid.value = (
-    form.value.firstName.length >= 2 &&
-    form.value.lastName.length >= 2 &&
-    form.value.idNumber.length >= 4 &&
-    !!form.value.idType &&
-    !!form.value.dob
-  );
+const previewBackImage = (file) => {
+  if (!file) {
+    backPreview.value = null;
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    backPreview.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
 };
 
-const canProceedToStep2 = computed(() => step1Valid.value);
-const isStep2Valid = computed(() => step2Valid.value);
+const submitForm = async () => {
+  const { valid: formValid } = await form.value.validate();
 
-function formatDate(dateString: string) {
-  if (!dateString) return '';
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+  if (!formValid) return;
 
-function submitKyc() {
   loading.value = true;
 
-  // Simulate API call
-  setTimeout(() => {
-    loading.value = false;
-    submitted.value = true;
-  }, 1500);
-}
+  try {
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
+    // Mock response - 80% chance of pending, 10% approved, 10% rejected
+    const randomStatus = Math.random();
+    if (randomStatus < 0.9) {
+      verificationStatus.value = 'pending';
+    } else if (randomStatus < 0.99) {
+      verificationStatus.value = 'approved';
+    } else {
+      verificationStatus.value = 'rejected';
+      const reasons = [
+        'Document image is blurry',
+        'Document is expired',
+        'Information not visible',
+        'Document type not accepted',
+        'Name mismatch'
+      ];
+      rejectionReason.value = reasons[Math.floor(Math.random() * reasons.length)];
+    }
+
+    // Store in localStorage for persistence
+    localStorage.setItem('kycStatus', verificationStatus.value);
+    if (verificationStatus.value === 'rejected') {
+      localStorage.setItem('kycRejectionReason', rejectionReason.value);
+    }
+
+  } catch (error) {
+    console.error('Error submitting KYC:', error);
+    // In a real app, you might show a toast notification here
+  } finally {
+    loading.value = false;
+  }
+};
+
+const checkStatus = async () => {
+  loading.value = true;
+  try {
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Randomly change status if pending (50% chance)
+    if (verificationStatus.value === 'pending' && Math.random() > 0.5) {
+      if (Math.random() > 0.1) {
+        verificationStatus.value = 'approved';
+        localStorage.setItem('kycStatus', 'approved');
+      } else {
+        verificationStatus.value = 'rejected';
+        const reasons = [
+          'Unable to verify document',
+        ];
+        rejectionReason.value = reasons[Math.floor(Math.random() * reasons.length)];
+        localStorage.setItem('kycStatus', 'rejected');
+        localStorage.setItem('kycRejectionReason', rejectionReason.value);
+      }
+    }
+  } finally {
+    loading.value = false;
+  }
+};
+
+const resetForm = () => {
+  verificationStatus.value = 'unverified';
+  idType.value = '';
+  idFront.value = null;
+  idBack.value = null;
+  consent.value = false;
+  frontPreview.value = null;
+  backPreview.value = null;
+  rejectionReason.value = '';
+  form.value?.reset();
+  localStorage.removeItem('kycStatus');
+  localStorage.removeItem('kycRejectionReason');
+};
+
+// Check for existing status on component mount
 onMounted(() => {
-  mounted.value = true;
+  const savedStatus = localStorage.getItem('kycStatus');
+  if (savedStatus) {
+    verificationStatus.value = savedStatus;
+    if (savedStatus === 'rejected') {
+      rejectionReason.value = localStorage.getItem('kycRejectionReason') || '';
+    }
+  }
 });
 </script>
 
 <style scoped>
-.max-width-800 {
-  max-width: 800px;
-  margin: 0 auto;
+.primary {
+  background-color: #1976d2 !important;
+  border-color: #1976d2 !important;
 }
 </style>

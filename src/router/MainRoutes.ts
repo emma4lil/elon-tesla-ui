@@ -7,11 +7,6 @@ const MainRoutes = {
   component: () => import('@/layouts/full/FullLayout.vue'),
   children: [
     {
-      name: 'LandingPage',
-      path: '/',
-      component: () => import('@/views/dashboards/default/DefaultDashboard.vue')
-    },
-    {
       name: 'Default',
       path: '/dashboard/default',
       component: () => import('@/views/dashboards/default/DefaultDashboard.vue')
@@ -24,7 +19,7 @@ const MainRoutes = {
     {
       name: 'Starter',
       path: '/starter',
-      component: () => import('@/views/StarterPage.vue')
+      component: () => import('@/views/IndexPage.vue')
     },
     {
       name: 'Tabler Icons',
@@ -50,6 +45,11 @@ const MainRoutes = {
       name: 'Colors',
       path: '/utils/colors',
       component: () => import('@/views/utilities/colors/ColorPage.vue')
+    },
+    {
+      name: 'Settings',
+      path: '/settings',
+      component: () => import('@/components/shared/TradeSettings.vue')
     }
   ]
 };
