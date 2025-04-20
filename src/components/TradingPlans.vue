@@ -1,9 +1,9 @@
 <template>
   <div class="px-4">
-    <h1 class="text-center font-weight-bold my-8">REFERRAL PROGRAM</h1>
+    <h1 class="text-center font-weight-bold my-8">Trading Plans</h1>
     <v-row>
       <v-col v-for="(plan, index) in plans" :key="index" cols="12" md="3">
-        <v-card variant="outlined" rounded="large" width="350" class="" :class="{ 'recommended': plan.recommended }" elevation="0">
+        <v-card variant="outlined" rounded="large" class="" :class="{ 'recommended': plan.recommended }" elevation="0">
           <v-card-title class="text-center text-uppercase text-grey-darken-2">{{ plan.title }}</v-card-title>
           <v-card-subtitle class="text-h4 text-center font-weight-bold">${{ plan.price.toLocaleString() }}</v-card-subtitle>
           <v-card-text>

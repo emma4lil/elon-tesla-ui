@@ -5,20 +5,38 @@
 
   <section>
     <TradingPlans/>
+    <section>
+      <v-parallax :src="imageLink.main" height="550">
+        <div class="d-flex flex-column align-center justify-center text-center text-white font-weight-bold" style="height: 100%; max-width: 800px; margin: 0 auto;">
+          <div class="text-h1 mt-3">SERVICES</div>
+          <p>
+            Attracting investments, Tesla Invest Pro implements dozens of projects related to the organization of cryptocurrency investment, forex, stocks and e-currency trading processes.
+            The inflow of funds provides a non-stop process of earning money for a company, at the same time, the profit is evenly distributed among investors depending on the size of their deposits.
+          </p>
+
+          <div class="text-h1 mt-4">Investment offers</div>
+          <p>
+            Tesla Invest Pro offers a revolutionary investment model, modern, as transparent as possible and affordable for any person.
+            If you already into investments, it’s time to form a stable passive income in this field.
+          </p>
+
+          <div class="text-h1 mt-4">Mission</div>
+          <p>
+            To build the Tesla Invest Pro brand as the world’s most popular financial broker institution recognized for innovation, superior performance, and creation of premium financial value for all stakeholders.
+          </p>
+
+          <div class="text-h1 mt-4">Core Values</div>
+          <p>
+            Integrity, Professionalism, Corporate Governance, Loyalty and Excellent Service.
+          </p>
+        </div>
+      </v-parallax>
+    </section>
+
     <Testimonials/>
   </section>
 
-  <section>
-    <v-parallax :src="imageLink.main" height="380">
-      <v-layout column align-center justify-center>
-        <div class="headline white--text mb-3 text-xs-center">
-          Endorfine is a social network that allows everyone to reach a huge audience with a tap
-        </div>
-        <em>With the power of Endorfine you don't need to be famous or post pics of cute cats in order to get visibility</em>
-        <v-btn class="blue lighten-2 mt-5" dark large href="/pre-made-themes"> Get more info </v-btn>
-      </v-layout>
-    </v-parallax>
-  </section>
+
 
   <section>
     <v-container grid-list-md> </v-container>
@@ -45,7 +63,7 @@ export default {
     return {
       title: 'Endorfine',
       imageLink: {
-        main: 'https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2Fb13f0434-b228-11e6-8e5d-5252025056ab_web_scale_0.4666667_0.4666667__.jpg?alt=media&token=660df23e-599e-434b-9313-ba69c973eeea',
+        main: 'https://images.unsplash.com/photo-1643488072086-9d7318c0a04b?q=80&w=3869&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         sub_main:
           'https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2FNight-Club-Clubbing-Jobs-Abroad2.jpg?alt=media&token=82bbda7d-5df4-430b-9217-adaf1c8485c5',
         logo: 'https://firebasestorage.googleapis.com/v0/b/endorfinevue.appspot.com/o/assets%2Fandroid-chrome-512x512.png?alt=media&token=8a0a66f6-4741-4ff6-8f28-eb9ec74374df',
