@@ -7,7 +7,7 @@ import AuthLogin from './authForms/AuthLogin.vue';
   <v-row class="h-screen" no-gutters>
     <!---Left Part-->
     <v-col cols="12" class="d-flex align-center bg-lightprimary">
-      <v-container>
+      <v-container fluid>
         <div class="pa-7 pa-sm-12">
           <v-row justify="center">
             <v-col cols="12" lg="10" xl="6" md="7">

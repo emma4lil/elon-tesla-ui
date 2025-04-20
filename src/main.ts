@@ -18,7 +18,7 @@ const app = createApp(App);
 fakeBackend();
 app.use(createPinia());
 const auth = useAuthStore()
-auth.onInit()
+await auth.onInit()
 app.use(router);
 app.use(PerfectScrollbarPlugin);
 app.use(VueTablerIcons);

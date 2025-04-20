@@ -56,8 +56,6 @@ import { SettingsIcon } from 'vue-tabler-icons';
 const auth = useAuthStore();
 const user = auth.user;
 
-const drawer = ref(true);
-
 const links = [
   { text: 'Login', to: '/login' },
   { text: 'Register', to: '/register' }

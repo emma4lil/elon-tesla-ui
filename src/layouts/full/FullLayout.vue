@@ -21,25 +21,25 @@ const customizer = useCustomizerStore();
       <VerticalHeaderVue />
 
       <v-main>
-        <v-container fluid class="page-wrapper">
+        <v-container class="page-wrapper">
           <div>
             <RouterView />
-            <v-btn
-              class="customizer-btn"
-              size="large"
-              icon
-              variant="flat"
-              color="secondary"
-              @click.stop="customizer.SET_CUSTOMIZER_DRAWER(!customizer.Customizer_drawer)"
-            >
-              <SettingsIcon class="icon" />
-            </v-btn>
+<!--            <v-btn-->
+<!--              class="customizer-btn"-->
+<!--              size="small"-->
+<!--              icon-->
+<!--              variant="flat"-->
+<!--              color="secondary"-->
+<!--              @click.stop="customizer.SET_CUSTOMIZER_DRAWER(!customizer.Customizer_drawer)"-->
+<!--            >-->
+<!--              <SettingsIcon class="icon" />-->
+<!--            </v-btn>-->
           </div>
         </v-container>
         <v-container fluid class="pt-0">
-          <div>
+
             <FooterPanel />
-          </div>
+
         </v-container>
       </v-main>
     </v-app>

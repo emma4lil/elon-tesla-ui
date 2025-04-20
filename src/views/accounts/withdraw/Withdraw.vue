@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-6" fluid>
+  <v-container class="mt-4" fluid>
     <!-- Header and Withdrawal Button -->
     <v-row class="mb-6">
       <v-col cols="12" class="d-flex justify-space-between align-center">
