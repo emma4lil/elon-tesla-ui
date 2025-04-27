@@ -28,7 +28,8 @@ export default defineConfig({
     }
   },
   build: {
-    chunkSizeWarningLimit: 1024 * 1024 // Set the limit to 1 MB
+    chunkSizeWarningLimit: 1024 * 1024, // Set the limit to 1 MB
+    target: 'esnext'
   },
   optimizeDeps: {
     exclude: ['vuetify'],
