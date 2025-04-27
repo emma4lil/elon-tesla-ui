@@ -21,8 +21,8 @@ const customizer = useCustomizerStore();
       <VerticalHeaderVue />
 
       <v-main>
-        <v-container class="page-wrapper">
-          <div>
+        <v-container class="page-wrapper" fluid>
+
             <RouterView />
 <!--            <v-btn-->
 <!--              class="customizer-btn"-->
@@ -34,7 +34,7 @@ const customizer = useCustomizerStore();
 <!--            >-->
 <!--              <SettingsIcon class="icon" />-->
 <!--            </v-btn>-->
-          </div>
+
         </v-container>
         <v-container fluid class="pt-0">
 

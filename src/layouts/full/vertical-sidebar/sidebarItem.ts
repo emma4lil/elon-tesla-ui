@@ -5,7 +5,7 @@ import {
   CurrencyBitcoinIcon,
   BuildingBankIcon,
   DashboardIcon,
-  Settings2Icon
+  Settings2Icon,
 
 } from 'vue-tabler-icons';
 
@@ -51,6 +51,11 @@ const sidebarItems: menu[] = [
     title: "KYC",
     icon: EPassportIcon,
     to: '/accounts/kyc'
+  },
+  {
+    title: "Explore Plans",
+    icon: CashBanknoteIcon,
+    to: '/accounts/plans'
   },
   {header: 'Settings'},
   {

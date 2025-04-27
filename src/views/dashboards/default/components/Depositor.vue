@@ -1,16 +1,17 @@
 <template>
-  <div class="ma-2 mt-4">
-    <v-btn block color="secondary" size="large" variant="tonal" class="my-2" @click="depositDialog = true"> Buy crypto </v-btn>
+  <section class="ma-2 mt-4">
+    <v-btn block color="primary" size="large" variant="outlined" class="my-2" @click="depositDialog = true"> Deposit </v-btn>
 
     <!-- Deposit Dialog -->
     <v-dialog v-model="depositDialog" max-width="500">
       <v-card>
         <v-card-title class="d-flex justify-space-between align-center">
           <span>Deposit Funds</span>
-          <v-btn icon @click="depositDialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
         </v-card-title>
+
+        <v-sheet color="success" class="pa-4">
+          {{props.description}}
+        </v-sheet>
 
         <v-card-text class="pt-4">
           <div class="text-subtitle-1 mb-2">Deposit Crypto ({{ selectedCurrency.symbol }})</div>
@@ -28,11 +29,15 @@
 
           <v-text-field v-model="selectedCurrency.address" label="Wallet address" readonly variant="outlined" class="mb-2">
             <template v-slot:append>
-              <v-btn icon size="small" @click="copyAddress">
-                <v-icon>mdi-content-copy</v-icon>
+              <v-btn size="small" @click="copyAddress">
+                copy
               </v-btn>
             </template>
           </v-text-field>
+
+          <div class="text-h3 text-center pb-2">
+           Deposit ${{props.amount}} <v-btn size="small" variant="outlined">I have paid</v-btn>
+          </div>
 
           <v-alert type="info" variant="tonal" class="mb-4">
             <div class="text-caption">
@@ -43,11 +48,30 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-  </div>
+  </section>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+
+let props = defineProps({
+  title: {
+    type: String,
+    default: 'Buy Crypto'
+  },
+  blocked: {
+    type: Boolean,
+    default: false
+  },
+  amount: {
+    type: Number,
+    default: 1000
+  },
+  description: {
+    type: String,
+    default: 'Deposit crypto to your account'
+  }
+});
 
 const walletAddress = ref([
   {

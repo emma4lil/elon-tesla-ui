@@ -1,15 +1,11 @@
 <template>
   <v-container class="my-8" fluid>
     <v-card class="mx-auto" max-width="1000">
-      <v-card-title class="text-h5 bg-deep-purple bg-deep-orange white--text pa-4">
-        KYC Verification
-      </v-card-title>
+      <v-card-title class="text-h5 bg-deep-purple bg-deep-orange white--text pa-4"> KYC Verification </v-card-title>
 
       <v-card-text class="pa-6">
         <template v-if="verificationStatus === 'pending'">
-          <v-alert type="info" class="mb-6">
-            Your verification is pending approval. We'll notify you once it's completed.
-          </v-alert>
+          <v-alert type="info" class="mb-6"> Your verification is pending approval. We'll notify you once it's completed. </v-alert>
           <div class="d-flex justify-space-between">
             <v-btn color="primary" @click="resetForm">Submit Another Document</v-btn>
             <v-btn color="secondary" @click="checkStatus">Check Status</v-btn>
@@ -33,8 +29,8 @@
 
         <template v-else>
           <p class="mb-6">
-            To complete your KYC verification, please upload a clear photo of your government-issued ID
-            (Passport, Driver's License, or National ID).
+            To complete your KYC verification, please upload a clear photo of your government-issued ID (Passport, Driver's License, or
+            National ID).
           </p>
 
           <v-form ref="form" v-model="valid" @submit.prevent="submitForm">
@@ -43,7 +39,7 @@
               v-model="idType"
               :items="idTypes"
               label="ID Type"
-              :rules="[v => !!v || 'ID type is required']"
+              :rules="[(v) => !!v || 'ID type is required']"
               required
               outlined
               class="mb-4"
@@ -61,13 +57,7 @@
               @change="previewFrontImage"
             ></v-file-input>
 
-            <v-img
-              v-if="frontPreview"
-              :src="frontPreview"
-              max-height="200"
-              contain
-              class="mb-4"
-            ></v-img>
+            <v-img v-if="frontPreview" :src="frontPreview" max-height="200" contain class="mb-4"></v-img>
 
             <v-file-input
               variant="outlined"
@@ -80,29 +70,16 @@
               @change="previewBackImage"
             ></v-file-input>
 
-            <v-img
-              v-if="backPreview"
-              :src="backPreview"
-              max-height="200"
-              contain
-              class="mb-4"
-            ></v-img>
+            <v-img v-if="backPreview" :src="backPreview" max-height="200" contain class="mb-4"></v-img>
 
             <v-checkbox
               v-model="consent"
-              :rules="[v => !!v || 'You must agree to continue']"
+              :rules="[(v) => !!v || 'You must agree to continue']"
               label="I certify that this is a valid government-issued ID and the information is accurate."
               required
             ></v-checkbox>
 
-            <v-btn
-              type="submit"
-              color="primary"
-              :loading="loading"
-              :disabled="!valid || loading"
-              block
-              large
-            >
+            <v-btn type="submit" color="primary" :loading="loading" :disabled="!valid || loading" block large>
               Submit for Verification
             </v-btn>
           </v-form>
@@ -122,13 +99,7 @@ const verificationStatus = ref('unverified');
 const rejectionReason = ref('');
 
 const idType = ref('');
-const idTypes = ref([
-  'Passport',
-  'Driver License',
-  'National ID',
-  'Residence Permit',
-  'Other Government ID'
-]);
+const idTypes = ref(['Passport', 'Driver License', 'National ID', 'Residence Permit', 'Other Government ID']);
 
 const idFront = ref(null);
 const idBack = ref(null);
@@ -170,7 +141,7 @@ const submitForm = async () => {
 
   try {
     // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // Mock response - 80% chance of pending, 10% approved, 10% rejected
     const randomStatus = Math.random();
@@ -195,7 +166,6 @@ const submitForm = async () => {
     if (verificationStatus.value === 'rejected') {
       localStorage.setItem('kycRejectionReason', rejectionReason.value);
     }
-
   } catch (error) {
     console.error('Error submitting KYC:', error);
     // In a real app, you might show a toast notification here
@@ -208,7 +178,7 @@ const checkStatus = async () => {
   loading.value = true;
   try {
     // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Randomly change status if pending (50% chance)
     if (verificationStatus.value === 'pending' && Math.random() > 0.5) {
@@ -217,9 +187,7 @@ const checkStatus = async () => {
         localStorage.setItem('kycStatus', 'approved');
       } else {
         verificationStatus.value = 'rejected';
-        const reasons = [
-          'Unable to verify document',
-        ];
+        const reasons = ['Unable to verify document'];
         rejectionReason.value = reasons[Math.floor(Math.random() * reasons.length)];
         localStorage.setItem('kycStatus', 'rejected');
         localStorage.setItem('kycRejectionReason', rejectionReason.value);

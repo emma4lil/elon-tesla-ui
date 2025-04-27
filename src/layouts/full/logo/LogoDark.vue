@@ -1,6 +1,7 @@
 <template>
   <v-card max-width="100" variant="text" to="/" class="logo d-flex">
-    <img  src="../../../assets/footerlogo.png" height="37" width="55" /><span>ElonTesla</span>
+    <img  src="../../../assets/footerlogo.png" height="37" width="55" />
+    <div class="font-weight-bold">Tesla Stocks</div>
   </v-card>
 </template>
 

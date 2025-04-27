@@ -20,6 +20,11 @@ const AccountRoutes = {
       name: 'KYC',
       path: '/accounts/kyc',
       component: () => import('@/views/accounts/kyc/VerifyKyc.vue')
+    },
+    {
+      name: 'Explore Plans',
+      path: '/accounts/plans',
+      component: () => import('@/views/accounts/Products/BuyProducts.vue')
     }
   ]
 };

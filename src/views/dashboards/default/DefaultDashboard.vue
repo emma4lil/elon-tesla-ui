@@ -1,14 +1,12 @@
 <script setup lang="ts">
 // imported components
 import TotalEarning from './components/TotalEarning.vue';
-import TotalOrder from './components/TotalOrder.vue';
 import PopularStocks from './components/PopularStocks.vue';
 import SymbolTrendView from '@/views/dashboards/default/components/SymbolTrendView.vue';
-import TechAnalysis from '@/views/dashboards/default/components/TechAnalysis.vue';
 import CrptoMarquee from '@/views/dashboards/default/components/CrptoMarquee.vue';
 import BuySell from '@/views/dashboards/default/components/BuySell.vue';
-import Depositor from '@/views/dashboards/default/components/Depositor.vue';
 import OrderView from '@/components/shared/OrderView.vue';
+import ProductCard from '@/components/shared/ProductCard.vue';
 </script>
 
 <template>
@@ -19,14 +17,47 @@ import OrderView from '@/components/shared/OrderView.vue';
         <CrptoMarquee />
       </v-card>
     </v-col>
+    <v-col cols="12">
+      <div class="d-flex justify-center">
+        <ProductCard
+          from="500"
+          to="100,000"
+          title="Investment Plans"
+          description="💼 Secure Your Future with Tesla Stocks Investment Plans! 💼 Start small, grow big! Whether you're saving for your dreams or building wealth for tomorrow, our flexible Tesla investment plans have you covered."
+          class="mr-2"
+        />
+        <ProductCard
+          from="500"
+          to="100,000"
+          title="Buy Shares"
+          description="Don't just watch history being made — be a part of it. Buy Tesla shares today and ride the wave of innovation, energy, and unstoppable growth.Upgrade Plans 🔴 Fast. Easy. Secure. 🔴"
+          class="mr-2"
+        />
+
+        <ProductCard
+          from="500"
+          to="75,000"
+          title="Buy Shares"
+          description="Don't just watch history being made — be a part of it. Buy Tesla shares today and ride the wave of innovation, energy, and unstoppable growth.Upgrade Plans 🔴 Fast. Easy. Secure. 🔴"
+          class="mr-2"
+        />
+
+        
+
+
+      </div>
+    </v-col>
     <!--row 2-->
     <v-col cols="12" md="8" class="red">
       <v-row>
-        <v-col cols="12"
-          ><v-card height="600">
-            <SymbolTrendView symbol="NASDAQ:TSLA" interval="240" theme="dark" autosize /> </v-card
-        ></v-col>
-        <v-col cols="12"> <OrderView /></v-col>
+        <v-col cols="12">
+          <v-card height="600">
+            <SymbolTrendView symbol="NASDAQ:TSLA" interval="240" theme="light" autosize />
+          </v-card>
+        </v-col>
+        <v-col cols="12">
+          <OrderView />
+        </v-col>
       </v-row>
     </v-col>
     <v-col cols="12" md="4" class="red">
@@ -38,7 +69,7 @@ import OrderView from '@/components/shared/OrderView.vue';
           <BuySell />
         </v-col>
         <v-col cols="12">
-          <PopularStocks/>
+          <PopularStocks />
         </v-col>
       </v-row>
     </v-col>
