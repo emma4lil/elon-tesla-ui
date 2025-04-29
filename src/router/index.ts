@@ -35,7 +35,7 @@ interface AuthStore {
 
 router.beforeEach(async (to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/'];
+  const publicPages = ['/', '/about'];
   const auth: AuthStore = useAuthStore();
 
   const isPublicPage = publicPages.includes(to.path);

@@ -11,6 +11,11 @@ const PublicRoutes = {
       component: () => import('@/views/IndexPage.vue')
     },
     {
+      name: 'About Us',
+      path: '/about',
+      component: () => import('@/views/pages/AboutUs.vue')
+    },
+    {
       name: 'Authentication',
       path: '/login',
       component: () => import('@/views/authentication/LoginPage.vue')

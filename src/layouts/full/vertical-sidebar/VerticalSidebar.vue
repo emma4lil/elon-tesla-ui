@@ -27,12 +27,14 @@ const adminNav = ref({
     left
     v-model="customizer.Sidebar_drawer"
     elevation="0"
-    rail-width="75"
-    mobile-breakpoint="lg"
+    rail-width="60"
+    mobile-breakpoint="md"
     app
     class="leftSidebar"
     :rail="customizer.mini_sidebar"
     expand-on-hover
+    temporary
+    :permanent="$vuetify.display.mdAndUp"
   >
     <!---Logo part -->
 
@@ -69,3 +71,36 @@ const adminNav = ref({
     </perfect-scrollbar>
   </v-navigation-drawer>
 </template>
+
+<style scoped>
+.leftSidebar {
+  border-right: 1px solid rgba(var(--v-theme-primary), 0.1);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.leftPadding {
+  transition: all 0.2s ease;
+}
+
+.leftPadding:hover {
+  background-color: rgba(var(--v-theme-primary), 0.05);
+  border-radius: 8px;
+}
+
+@media (max-width: 960px) {
+  .leftSidebar {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-width: 600px) {
+  .pa-5 {
+    padding: 12px !important;
+  }
+
+  .v-list {
+    padding: 8px !important;
+  }
+}
+</style>

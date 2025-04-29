@@ -17,7 +17,7 @@ function searchbox() {
 </script>
 
 <template>
-  <v-app-bar elevation="0" height="80">
+  <v-app-bar elevation="0" :height="$vuetify.display.smAndDown ? 64 : 80" class="header-bar">
     <v-btn
       class="hidden-md-and-down text-secondary"
       color="lightsecondary"
@@ -104,3 +104,28 @@ function searchbox() {
     </v-menu>
   </v-app-bar>
 </template>
+
+<style scoped>
+.header-bar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+  backdrop-filter: blur(10px);
+  background-color: rgba(var(--v-theme-surface), 0.95) !important;
+  border-bottom: 1px solid rgba(var(--v-theme-primary), 0.1);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .header-bar {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .v-btn {
+    margin: 0 2px;
+  }
+
+  .search-sheet {
+    top: 64px;
+  }
+}
+</style>

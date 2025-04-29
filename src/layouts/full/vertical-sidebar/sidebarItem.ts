@@ -36,6 +36,11 @@ const sidebarItems: menu[] = [
     icon: CurrencyBitcoinIcon,
     to: '/dashboard/orders'
   },
+  {
+    title: 'About Us',
+    icon: CircleIcon,
+    to: '/about'
+  },
   { header: 'Accounts' },
   {
     title: 'Withdraw',
