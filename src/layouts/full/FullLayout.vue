@@ -7,13 +7,12 @@ import FooterPanel from './footer/FooterPanel.vue';
 import { useCustomizerStore } from '@/stores/customizer.ts';
 
 const customizer = useCustomizerStore();
-
 </script>
 
 <template>
   <v-locale-provider>
     <v-app
-      theme="PurpleTheme"
+      theme="DarkThemeOrange"
       :class="[customizer.fontTheme, customizer.mini_sidebar ? 'mini-sidebar' : '', customizer.inputBg ? 'inputWithbg' : '']"
     >
       <Customizer />
@@ -22,24 +21,20 @@ const customizer = useCustomizerStore();
 
       <v-main>
         <v-container class="page-wrapper" fluid>
-
-            <RouterView />
-<!--            <v-btn-->
-<!--              class="customizer-btn"-->
-<!--              size="small"-->
-<!--              icon-->
-<!--              variant="flat"-->
-<!--              color="secondary"-->
-<!--              @click.stop="customizer.SET_CUSTOMIZER_DRAWER(!customizer.Customizer_drawer)"-->
-<!--            >-->
-<!--              <SettingsIcon class="icon" />-->
-<!--            </v-btn>-->
-
+          <RouterView />
+          <!--            <v-btn-->
+          <!--              class="customizer-btn"-->
+          <!--              size="small"-->
+          <!--              icon-->
+          <!--              variant="flat"-->
+          <!--              color="secondary"-->
+          <!--              @click.stop="customizer.SET_CUSTOMIZER_DRAWER(!customizer.Customizer_drawer)"-->
+          <!--            >-->
+          <!--              <SettingsIcon class="icon" />-->
+          <!--            </v-btn>-->
         </v-container>
         <v-container fluid class="pt-0">
-
-            <FooterPanel />
-
+          <FooterPanel />
         </v-container>
       </v-main>
     </v-app>

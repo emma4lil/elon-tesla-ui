@@ -18,34 +18,33 @@ import ProductCard from '@/components/shared/ProductCard.vue';
       </v-card>
     </v-col>
     <v-col cols="12">
-      <div class="d-flex justify-center">
-        <ProductCard
-          from="500"
-          to="100,000"
-          title="Investment Plans"
-          description="💼 Secure Your Future with Tesla Stocks Investment Plans! 💼 Start small, grow big! Whether you're saving for your dreams or building wealth for tomorrow, our flexible Tesla investment plans have you covered."
-          class="mr-2"
-        />
-        <ProductCard
-          from="500"
-          to="100,000"
-          title="Buy Shares"
-          description="Don't just watch history being made — be a part of it. Buy Tesla shares today and ride the wave of innovation, energy, and unstoppable growth.Upgrade Plans 🔴 Fast. Easy. Secure. 🔴"
-          class="mr-2"
-        />
+      <v-row>
+        <v-col cols="12" md="4">
+          <ProductCard
+            from="500"
+            to="100,000"
+            title="Investment Plans"
+            description="💼 Secure Your Future with Tesla Stocks Investment Plans! 💼 Start small, grow big! Whether you're saving for your dreams or building wealth for tomorrow, our flexible Tesla investment plans have you covered."
+            class="mr-2"
+        /></v-col>
 
-        <ProductCard
-          from="500"
-          to="75,000"
-          title="Buy Shares"
-          description="Don't just watch history being made — be a part of it. Buy Tesla shares today and ride the wave of innovation, energy, and unstoppable growth.Upgrade Plans 🔴 Fast. Easy. Secure. 🔴"
-          class="mr-2"
-        />
-
-        
-
-
-      </div>
+        <v-col cols="12" md="4">
+          <ProductCard
+            from="500"
+            to="100,000"
+            title="Buy Shares"
+            description="Don't just watch history being made — be a part of it. Buy Tesla shares today and ride the wave of innovation, energy, and unstoppable growth.Upgrade Plans 🔴 Fast. Easy. Secure. 🔴"
+            class="mr-2"
+        /></v-col>
+        <v-col cols="12" md="4">
+          <ProductCard
+            from="500"
+            to="75,000"
+            title="Upgrade Plans"
+            description="🔴 Fast. Easy. Secure. 🔴 Upgrade your Tesla investment plan to unlock exclusive benefits and maximize your returns. Don't miss out on this opportunity to supercharge your investment journey!"
+            class="mr-2"
+        /></v-col>
+      </v-row>
     </v-col>
     <!--row 2-->
     <v-col cols="12" md="8" class="red">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue';
+import { shallowRef, ref } from 'vue';
 import { useCustomizerStore } from '../../../stores/customizer';
 import sidebarItems from './sidebarItem';
 
@@ -8,9 +8,18 @@ import NavItem from './NavItem/NavItem.vue';
 import NavCollapse from './NavCollapse/NavCollapse.vue';
 import ExtraBox from './extrabox/ExtraBox.vue';
 import Logo from '../logo/LogoMain.vue';
+import { CircleIcon } from 'vue-tabler-icons';
 
 const customizer = useCustomizerStore();
 const sidebarMenu = shallowRef(sidebarItems);
+const isAdmin = ref(false);
+
+const adminNav = ref({
+  title: 'Manage KYC',
+  icon: CircleIcon,
+  to: '/accounts/kyc/manage',
+  isAdmin: true
+});
 </script>
 
 <template>
@@ -47,7 +56,10 @@ const sidebarMenu = shallowRef(sidebarItems);
           <NavItem :item="item" v-else class="leftPadding" />
           <!---End Single Item-->
         </template>
+
+        <nav-item v-if="isAdmin" :item="adminNav" />
       </v-list>
+
       <div class="pa-4">
         <ExtraBox />
       </div>

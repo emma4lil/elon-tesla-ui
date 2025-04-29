@@ -24,7 +24,7 @@ var props = defineProps({
 </script>
 
 <template>
-  <v-card max-width="300" class="">
+  <v-card  class="">
     <v-card-text class="bg-lightwarning rounded circle sm-circle lg-circle hide-menu">
       <v-row>
         <v-col cols="12">

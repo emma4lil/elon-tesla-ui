@@ -5,8 +5,7 @@ import {
   CurrencyBitcoinIcon,
   BuildingBankIcon,
   DashboardIcon,
-  Settings2Icon,
-
+  Settings2Icon
 } from 'vue-tabler-icons';
 
 export interface menu {
@@ -23,6 +22,7 @@ export interface menu {
   disabled?: boolean;
   type?: string;
   subCaption?: string;
+  isAdmin?: boolean;
 }
 const sidebarItems: menu[] = [
   { header: 'Dashboard' },
@@ -34,9 +34,9 @@ const sidebarItems: menu[] = [
   {
     title: 'Active Orders',
     icon: CurrencyBitcoinIcon,
-    to: '/dashboard/orders',
+    to: '/dashboard/orders'
   },
-  {header: 'Accounts'},
+  { header: 'Accounts' },
   {
     title: 'Withdraw',
     icon: CashBanknoteIcon,
@@ -48,25 +48,31 @@ const sidebarItems: menu[] = [
     to: '/accounts/deposit'
   },
   {
-    title: "KYC",
+    title: 'KYC',
     icon: EPassportIcon,
-    to: '/accounts/kyc'
+    children: [
+      {
+        title: 'Verify KYC',
+        icon: CircleIcon,
+        to: '/accounts/kyc'
+      }
+    ]
   },
   {
-    title: "Explore Plans",
+    title: 'Explore Plans',
     icon: CashBanknoteIcon,
     to: '/accounts/plans'
   },
-  {header: 'Settings'},
+  { header: 'Settings' },
   {
-    title: "Trade Settings",
+    title: 'Trade Settings',
     icon: Settings2Icon,
     to: '/settings'
-  },
-]
+  }
+];
 
 const sidebarItem: menu[] = [
-  ...sidebarItems,
+  ...sidebarItems
   // { header: 'Dashboard' },
   // {
   //   title: 'Default',

@@ -21,7 +21,7 @@ var selectUpgrades = ref<number>(500);
           <v-card-text>
             <v-row>
               <v-col cols="12">
-                <div class="text-h3 mb-2 text-center">Select an Investment Plan</div>
+                <div class="text-h3 mb-2 text-center">Investment Plans</div>
                 <p class="text-body-1 mb-4 text-center">
                   💼 Secure Your Future with Tesla Stocks Investment Plans! 💼 Start small, grow big! Whether you're saving for your dreams
                   or building wealth for tomorrow, our flexible Tesla investment plans have you covered.
@@ -82,7 +82,7 @@ var selectUpgrades = ref<number>(500);
           <v-card-text>
             <v-row>
               <v-col cols="12">
-                <div class="text-h3 mb-2 text-center">Select an Upgrade Plan</div>
+                <div class="text-h3 mb-2 text-center">Upgrade Plans</div>
                 <p class="text-body-1 mb-4 text-center">
                   💼 Secure Your Future with Tesla Stocks Upgrade Plans! 💼 Start small, grow big! Whether you're saving for your dreams
                   or building wealth for tomorrow, our flexible Tesla investment plans have you covered.

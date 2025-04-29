@@ -1,6 +1,45 @@
 <template>
   <v-container class="my-8" fluid>
-    <v-card class="mx-auto" max-width="1000">
+    <v-card variant="outlined" v-if="status === 'approved'" class="mx-auto d-flex justify-center align-center pa-6">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="150"
+        height="150"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-success"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="9 12 12 15 16 10"></polyline>
+      </svg>
+      <div class="text-h3">Your kyc has been approved!</div>
+    </v-card>
+
+    <v-card variant="outlined" v-else-if="status === 'pending'" class="mx-auto d-flex justify-center align-center pa-6">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="150"
+        height="150"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-warning"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12" y2="16"></line>
+      </svg>
+      <div class="text-h3">Your KYC verification is pending approval.</div>
+    </v-card>
+
+    <v-card v-else class="mx-auto" max-width="1000">
       <v-card-title class="text-h5 bg-deep-purple bg-deep-orange white--text pa-4"> KYC Verification </v-card-title>
 
       <v-card-text class="pa-6">
@@ -12,20 +51,8 @@
           </div>
         </template>
 
-        <template v-else-if="verificationStatus === 'approved'">
-          <v-alert type="success" class="mb-6">
-            <v-icon left>mdi-check-circle</v-icon>
-            Your KYC verification has been approved!
-          </v-alert>
-        </template>
 
-        <template v-else-if="verificationStatus === 'rejected'">
-          <v-alert type="error" class="mb-6">
-            <v-icon left>mdi-alert-circle</v-icon>
-            Your KYC verification was rejected. Reason: {{ rejectionReason }}
-          </v-alert>
-          <v-btn color="primary" @click="resetForm">Try Again</v-btn>
-        </template>
+
 
         <template v-else>
           <p class="mb-6">
@@ -91,6 +118,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+import { supabase } from '@/superbase.ts';
 
 const form = ref(null);
 const valid = ref(false);
@@ -108,29 +137,10 @@ const consent = ref(false);
 const frontPreview = ref(null);
 const backPreview = ref(null);
 
-const previewFrontImage = (file) => {
-  if (!file) {
-    frontPreview.value = null;
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    frontPreview.value = e.target.result;
-  };
-  reader.readAsDataURL(file);
-};
-
-const previewBackImage = (file) => {
-  if (!file) {
-    backPreview.value = null;
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    backPreview.value = e.target.result;
-  };
-  reader.readAsDataURL(file);
-};
+// fetch kyc status from Supabase
+const status = ref('normal');
+const auth = useAuthStore();
+const user = auth.user?.user_metadata;
 
 const submitForm = async () => {
   const { valid: formValid } = await form.value.validate();
@@ -140,59 +150,26 @@ const submitForm = async () => {
   loading.value = true;
 
   try {
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const { data, error } = await supabase
+      .from('kyc')
+      .insert([
+        {
+          ownerId: user.sub,
+          email: user.email,
+        }
+      ])
+      .single();
 
-    // Mock response - 80% chance of pending, 10% approved, 10% rejected
-    const randomStatus = Math.random();
-    if (randomStatus < 0.9) {
-      verificationStatus.value = 'pending';
-    } else if (randomStatus < 0.99) {
-      verificationStatus.value = 'approved';
-    } else {
+    if (error) {
+      console.error('Error submitting KYC:', error);
       verificationStatus.value = 'rejected';
-      const reasons = [
-        'Document image is blurry',
-        'Document is expired',
-        'Information not visible',
-        'Document type not accepted',
-        'Name mismatch'
-      ];
-      rejectionReason.value = reasons[Math.floor(Math.random() * reasons.length)];
+      rejectionReason.value = error.message;
+    } else {
+      verificationStatus.value = 'pending';
+      localStorage.setItem('kycStatus', 'pending');
     }
-
-    // Store in localStorage for persistence
-    localStorage.setItem('kycStatus', verificationStatus.value);
-    if (verificationStatus.value === 'rejected') {
-      localStorage.setItem('kycRejectionReason', rejectionReason.value);
-    }
-  } catch (error) {
-    console.error('Error submitting KYC:', error);
-    // In a real app, you might show a toast notification here
-  } finally {
-    loading.value = false;
-  }
-};
-
-const checkStatus = async () => {
-  loading.value = true;
-  try {
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Randomly change status if pending (50% chance)
-    if (verificationStatus.value === 'pending' && Math.random() > 0.5) {
-      if (Math.random() > 0.1) {
-        verificationStatus.value = 'approved';
-        localStorage.setItem('kycStatus', 'approved');
-      } else {
-        verificationStatus.value = 'rejected';
-        const reasons = ['Unable to verify document'];
-        rejectionReason.value = reasons[Math.floor(Math.random() * reasons.length)];
-        localStorage.setItem('kycStatus', 'rejected');
-        localStorage.setItem('kycRejectionReason', rejectionReason.value);
-      }
-    }
+  } catch (err) {
+    console.error('Unexpected error:', err);
   } finally {
     loading.value = false;
   }
@@ -213,15 +190,24 @@ const resetForm = () => {
 };
 
 // Check for existing status on component mount
-onMounted(() => {
-  const savedStatus = localStorage.getItem('kycStatus');
-  if (savedStatus) {
-    verificationStatus.value = savedStatus;
-    if (savedStatus === 'rejected') {
-      rejectionReason.value = localStorage.getItem('kycRejectionReason') || '';
-    }
-  }
+onMounted(async () => {
+  await fetchKycStatus();
 });
+
+const fetchKycStatus = async () => {
+  try {
+    const { data, error } = await supabase.from('kyc').select('status').eq('ownerId', user.sub).single();
+
+    if (error) {
+      console.error('Error fetching KYC status:', error);
+    } else {
+      console.log('KYC status:', data);
+      status.value = data.status;
+    }
+  } catch (err) {
+    console.error('Unexpected error:', err);
+  }
+};
 </script>
 
 <style scoped>
