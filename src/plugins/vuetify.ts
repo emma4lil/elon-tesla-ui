@@ -3,9 +3,8 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import { icons } from './mdi-icon'; // Import icons from separate file
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
-import { PurpleTheme } from '@/theme/LightTheme';
-import {DarkPurpleTheme} from '@/theme/DarkThemePurple.ts';
-import {BybitDarkTheme} from '@/theme/BybitsTheme.ts';
+import { PurpleTheme } from '@/theme/LightTheme.ts'; // Import light theme
+import { DarkThemeOrange } from '@/theme/DarkThemeOrange.ts'; // Import dark theme
 
 export default createVuetify({
   components,
@@ -21,11 +20,10 @@ export default createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'PurpleTheme',
+    defaultTheme: 'DarkThemeOrange',
     themes: {
       PurpleTheme,
-      DarkPurpleTheme,
-      BybitDarkTheme
+      DarkThemeOrange
     }
   },
   defaults: {
