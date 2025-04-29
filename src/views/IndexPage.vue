@@ -2,28 +2,10 @@
   <!-- Hero Section with Carousel -->
   <section class="hero-section">
     <Carousel />
-    
+
     <!-- Market Ticker Overlay -->
     <div class="market-ticker-container">
-      <v-sheet class="ticker-wrapper py-2" color="rgba(0, 0, 0, 0.7)" rounded="lg">
-        <div class="d-flex align-center ticker-content">
-          <v-chip color="primary" class="mr-3">LIVE MARKET</v-chip>
-          <div class="ticker-scroll">
-            <div class="d-flex">
-              <div v-for="(asset, i) in marketData" :key="i" class="ticker-item mx-4">
-                <span class="font-weight-medium">{{ asset.symbol }}</span>
-                <span :class="asset.change >= 0 ? 'success--text' : 'error--text'" class="ml-2">
-                  {{ asset.price }} 
-                  <v-icon small :color="asset.change >= 0 ? 'success' : 'error'">
-                    {{ asset.change >= 0 ? 'mdi-arrow-up' : 'mdi-arrow-down' }}
-                  </v-icon>
-                  {{ Math.abs(asset.change) }}%
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </v-sheet>
+      <CrptoMarquee />
     </div>
   </section>
 
@@ -31,7 +13,7 @@
   <section class="stats-section py-8">
     <v-container>
       <v-row>
-        <v-col cols="12" md="3" v-for="(stat, i) in keyStats" :key="i">
+        <v-col cols="6" md="3" v-for="(stat, i) in keyStats" :key="i">
           <v-card class="stat-card text-center pa-4" elevation="0" rounded="lg">
             <v-icon size="48" color="primary" class="mb-2">{{ stat.icon }}</v-icon>
             <h3 class="text-h4 font-weight-bold">{{ stat.value }}</h3>
@@ -53,7 +35,7 @@
           </div>
         </v-col>
       </v-row>
-      <TradingPlans/>
+      <TradingPlans />
     </v-container>
   </section>
 
@@ -65,7 +47,7 @@
           <v-col cols="12" md="6">
             <v-card color="rgba(0, 0, 0, 0.7)" class="pa-6" rounded="lg">
               <h2 class="text-h3 font-weight-bold text-white mb-6">Why Choose Tesla Invest Pro</h2>
-              
+
               <div v-for="(feature, i) in platformFeatures" :key="i" class="d-flex align-start mb-4">
                 <v-avatar color="primary" size="48" class="mr-4">
                   <v-icon color="white">{{ feature.icon }}</v-icon>
@@ -75,20 +57,21 @@
                   <p class="text-body-1 text-white-darken-1">{{ feature.description }}</p>
                 </div>
               </div>
-              
+
               <v-btn color="primary" size="large" class="mt-4">Learn More</v-btn>
             </v-card>
           </v-col>
-          
+
           <v-col cols="12" md="6">
             <div class="d-flex flex-column justify-center h-100">
               <v-card color="rgba(0, 0, 0, 0.7)" class="pa-6 mb-4" rounded="lg">
                 <h3 class="text-h4 font-weight-bold text-white">Mission</h3>
                 <p class="text-body-1 text-white-darken-1">
-                  To build the Tesla Invest Pro brand as the world's most popular financial broker institution recognized for innovation, superior performance, and creation of premium financial value for all stakeholders.
+                  To build the Tesla Invest Pro brand as the world's most popular financial broker institution recognized for innovation,
+                  superior performance, and creation of premium financial value for all stakeholders.
                 </p>
               </v-card>
-              
+
               <v-card color="rgba(0, 0, 0, 0.7)" class="pa-6" rounded="lg">
                 <h3 class="text-h4 font-weight-bold text-white">Core Values</h3>
                 <v-chip-group>
@@ -117,7 +100,7 @@
           </div>
         </v-col>
       </v-row>
-      
+
       <v-row>
         <v-col cols="12" md="8">
           <v-card class="chart-card pa-4" height="400" rounded="lg">
@@ -137,7 +120,7 @@
             </div>
           </v-card>
         </v-col>
-        
+
         <v-col cols="12" md="4">
           <v-card class="market-news pa-4" height="400" rounded="lg">
             <h3 class="text-h5 font-weight-bold mb-4">Market News</h3>
@@ -170,7 +153,7 @@
           </div>
         </v-col>
       </v-row>
-      <Testimonials/>
+      <Testimonials />
     </v-container>
   </section>
 
@@ -183,8 +166,8 @@
             <v-card color="rgba(0, 0, 0, 0.7)" class="text-center pa-6" rounded="lg">
               <h2 class="text-h3 font-weight-bold text-white mb-4">Ready to Start Investing?</h2>
               <p class="text-body-1 text-white-darken-1 mb-6">
-                Join thousands of investors who trust Tesla Invest Pro for their investment needs. 
-                Get started today and take control of your financial future.
+                Join thousands of investors who trust Tesla Invest Pro for their investment needs. Get started today and take control of
+                your financial future.
               </p>
               <div class="d-flex justify-center">
                 <v-btn color="primary" size="large" class="mx-2">Create Account</v-btn>
@@ -206,13 +189,14 @@ import Carousel from '@/components/Carousel.vue';
 import VerticalHeader from '@/layouts/full/vertical-header/VerticalHeader.vue';
 import TradingPlans from '@/components/TradingPlans.vue';
 import Testimonials from '@/components/Testimonials.vue';
+import CrptoMarquee from '@/views/dashboards/default/components/CrptoMarquee.vue';
 
 export default {
   name: 'App',
-  components: { Testimonials, TradingPlans, VerticalHeader, Carousel, FooterPanel },
+  components: { CrptoMarquee, Testimonials, TradingPlans, VerticalHeader, Carousel, FooterPanel },
   data: function () {
     return {
-      title: 'Endorfine',
+      title: 'Tesla Stocks',
       imageLink: {
         main: 'https://images.unsplash.com/photo-1643488072086-9d7318c0a04b?q=80&w=3869&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         sub_main:
@@ -231,53 +215,53 @@ export default {
         { symbol: 'DOT/USD', price: '6.78', change: 0.9 }
       ],
       keyStats: [
-        { icon: 'mdi-account-group', value: '10M+', label: 'Active Users' },
-        { icon: 'mdi-currency-usd', value: '$2.5B', label: 'Trading Volume' },
-        { icon: 'mdi-earth', value: '150+', label: 'Countries' },
-        { icon: 'mdi-shield-check', value: '99.9%', label: 'Uptime' }
+        { icon: '$users', value: '10M+', label: 'Active Users' },
+        { icon: '$trading-volume', value: '$2.5B', label: 'Trading Volume' },
+        { icon: '$countries', value: '150+', label: 'Countries' },
+        { icon: '$uptime', value: '99.9%', label: 'Uptime' }
       ],
       platformFeatures: [
-        { 
-          icon: 'mdi-chart-line', 
-          title: 'Advanced Analytics', 
-          description: 'Get real-time market data and comprehensive analysis tools to make informed trading decisions.' 
+        {
+          icon: 'mdi-chart-line',
+          title: 'Advanced Analytics',
+          description: 'Get real-time market data and comprehensive analysis tools to make informed trading decisions.'
         },
-        { 
-          icon: 'mdi-shield-lock', 
-          title: 'Secure Investments', 
-          description: 'Your investments are protected with military-grade encryption and multi-layer security protocols.' 
+        {
+          icon: 'mdi-shield-lock',
+          title: 'Secure Investments',
+          description: 'Your investments are protected with military-grade encryption and multi-layer security protocols.'
         },
-        { 
-          icon: 'mdi-cash-multiple', 
-          title: 'Diverse Portfolio', 
-          description: 'Access a wide range of investment options including crypto, forex, stocks, and commodities.' 
+        {
+          icon: 'mdi-cash-multiple',
+          title: 'Diverse Portfolio',
+          description: 'Access a wide range of investment options including crypto, forex, stocks, and commodities.'
         },
-        { 
-          icon: 'mdi-account-check', 
-          title: 'Expert Support', 
-          description: '24/7 access to our team of investment professionals to help guide your investment strategy.' 
+        {
+          icon: 'mdi-account-check',
+          title: 'Expert Support',
+          description: '24/7 access to our team of investment professionals to help guide your investment strategy.'
         }
       ],
       marketNews: [
-        { 
-          image: 'https://randomuser.me/api/portraits/men/32.jpg', 
-          title: 'Bitcoin Surges Past $42K as Institutional Interest Grows', 
-          time: '2 hours ago' 
+        {
+          image: 'https://randomuser.me/api/portraits/men/32.jpg',
+          title: 'Bitcoin Surges Past $42K as Institutional Interest Grows',
+          time: '2 hours ago'
         },
-        { 
-          image: 'https://randomuser.me/api/portraits/women/44.jpg', 
-          title: 'Fed Signals Potential Rate Cut, Markets Respond Positively', 
-          time: '4 hours ago' 
+        {
+          image: 'https://randomuser.me/api/portraits/women/44.jpg',
+          title: 'Fed Signals Potential Rate Cut, Markets Respond Positively',
+          time: '4 hours ago'
         },
-        { 
-          image: 'https://randomuser.me/api/portraits/men/67.jpg', 
-          title: 'New Regulatory Framework for Crypto Expected Next Month', 
-          time: '6 hours ago' 
+        {
+          image: 'https://randomuser.me/api/portraits/men/67.jpg',
+          title: 'New Regulatory Framework for Crypto Expected Next Month',
+          time: '6 hours ago'
         },
-        { 
-          image: 'https://randomuser.me/api/portraits/women/28.jpg', 
-          title: 'Tesla Invest Pro Launches New Mobile Trading App', 
-          time: '8 hours ago' 
+        {
+          image: 'https://randomuser.me/api/portraits/women/28.jpg',
+          title: 'Tesla Invest Pro Launches New Mobile Trading App',
+          time: '8 hours ago'
         }
       ],
       email: '',

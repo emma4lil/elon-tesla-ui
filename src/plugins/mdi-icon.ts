@@ -10,7 +10,12 @@ import {
   mdiLinkedin,
   mdiGoogle,
   mdiYoutube,
-  mdiMonitorDashboard, mdiLogin
+  mdiMonitorDashboard, 
+  mdiLogin,
+  mdiAccountGroup,
+  mdiCurrencyUsd,
+  mdiEarth,
+  mdiShieldCheck,
 } from '@mdi/js';
 
 export const icons = {
@@ -26,5 +31,9 @@ export const icons = {
   youtube: mdiYoutube,
   cog: mdiCog,
   dashboard: mdiMonitorDashboard,
-  login: mdiLogin
+  login: mdiLogin,
+  users: mdiAccountGroup,
+  'trading-volume': mdiCurrencyUsd,
+  countries: mdiEarth,
+  uptime: mdiShieldCheck
 };
