@@ -35,7 +35,7 @@ export default createVuetify({
       rounded: 'lg'
     },
     VTooltip: {
-      // set v-tooltip default location to top
+      // set v-tooltip default location to top ji
       location: 'top'
     }
   }
