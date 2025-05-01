@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/layouts/full/logo/LogoDark.vue';
 import AuthRegister from '../authForms/AuthRegister.vue';
+import AnimatedBack from '@/components/AnimatedBack.vue';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import AuthRegister from '../authForms/AuthRegister.vue';
     <!---Left Part-->
     <v-col cols="12" class="d-flex align-center bg-lightprimary">
       <v-container>
+        <AnimatedBack />
         <div class="pa-7 pa-sm-12">
           <v-row justify="center">
             <v-col cols="12" lg="10" xl="6" md="7">

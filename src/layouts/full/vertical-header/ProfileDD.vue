@@ -16,14 +16,6 @@ const user = auth.user?.user_metadata;
   <div class="pa-4">
     <h4 class="mb-n1">Hello, <span class="font-weight-regular">{{ user.first_name }} {{ user.last_name }}</span></h4>
     <span class="text-subtitle-2 text-medium-emphasis"></span>
-
-    <v-text-field persistent-placeholder placeholder="Search" class="my-3" color="primary" variant="outlined" hide-details>
-      <template v-slot:prepend-inner>
-        <SearchIcon stroke-width="1.5" size="20" class="text-lightText SearchIcon" />
-      </template>
-    </v-text-field>
-
-    <v-divider></v-divider>
     <perfect-scrollbar style="height: calc(100vh - 300px); max-height: 515px">
       <div class="bg-lightwarning rounded-md pa-5 my-3 circle sm-circle lg-circle">
         <h4>Upgrade your plan</h4>

@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <section class="hero-section text-center py-16">
       <v-container>
-        <h1 class="text-h2 font-weight-bold mb-4">About Tesla Invest Pro</h1>
+        <h1 class="text-h2 font-weight-bold mb-4">About Tesla Stocks</h1>
         <p class="text-subtitle-1 mx-auto" style="max-width: 800px;">
           We are a leading investment platform dedicated to helping our clients achieve their financial goals through innovative trading solutions and expert guidance.
         </p>
@@ -17,7 +17,7 @@
           <v-col cols="12" md="6">
             <h2 class="text-h3 font-weight-bold mb-4">Our Story</h2>
             <p class="text-body-1 mb-4">
-              Founded in 2018, Tesla Invest Pro has grown from a small startup to one of the most trusted investment platforms in the industry. Our journey began with a simple mission: to make investing accessible to everyone.
+              Founded in 2020, Tesla Stocks has grown from a small startup to one of the most trusted investment platforms in the industry. Our journey began with a simple mission: to make investing accessible to everyone.
             </p>
             <p class="text-body-1 mb-4">
               Over the years, we've expanded our services, improved our technology, and built a team of experts dedicated to helping our clients succeed. Today, we serve thousands of investors worldwide, providing them with the tools and knowledge they need to make informed investment decisions.
@@ -51,7 +51,7 @@
             <v-card class="pa-6 h-100" elevation="2" rounded="lg">
               <h3 class="text-h4 font-weight-bold mb-4">Mission</h3>
               <p class="text-body-1">
-                To build the Tesla Invest Pro brand as the world's most popular financial broker institution recognized for innovation, superior performance, and creation of premium financial value for all stakeholders.
+                To build the Tesla Stocks brand as the world's most popular financial broker institution recognized for innovation, superior performance, and creation of premium financial value for all stakeholders.
               </p>
             </v-card>
           </v-col>
@@ -78,7 +78,7 @@
         <v-row>
           <v-col cols="12" class="text-center mb-8">
             <h2 class="text-h3 font-weight-bold">Our Leadership Team</h2>
-            <p class="text-subtitle-1 mt-2">Meet the experts behind Tesla Invest Pro</p>
+            <p class="text-subtitle-1 mt-2">Meet the experts behind Tesla Stocks</p>
           </v-col>
         </v-row>
         <v-row>
@@ -134,7 +134,7 @@
                 <v-icon color="primary" class="mr-4">mdi-email</v-icon>
                 <div>
                   <h4 class="text-subtitle-1 font-weight-bold">Email</h4>
-                  <p class="text-body-2">info@teslainvestpro.com</p>
+                  <p class="text-body-2">info@teslastocks.com</p>
                 </div>
               </div>
               <div class="d-flex align-center">
@@ -207,7 +207,7 @@ const teamMembers = ref([
   {
     name: 'John Smith',
     position: 'CEO & Founder',
-    bio: 'John has over 20 years of experience in the financial industry and has led Tesla Invest Pro since its founding.',
+    bio: 'John has over 20 years of experience in the financial industry and has led Tesla Stocks since its founding.',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
     socials: [
       { icon: 'mdi-linkedin', color: 'blue' },

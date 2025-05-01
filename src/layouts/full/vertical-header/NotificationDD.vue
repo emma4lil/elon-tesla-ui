@@ -39,7 +39,7 @@ const user = auth.user?.user_metadata;
         </div>
 
         <p class="text-subtitle-2 text-medium-emphasis mt-1">
-          Welcome to Elon Tesla! � Start trading smarter and unlock endless opportunities. We’re thrilled to have you on board! 🚀 Happy
+          Welcome to Tesla Stocks! � Start trading smarter and unlock endless opportunities. We’re thrilled to have you on board! 🚀 Happy
           trading! 💰
         </p>
         <div class="mt-3">

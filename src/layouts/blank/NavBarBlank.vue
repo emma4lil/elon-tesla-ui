@@ -8,8 +8,9 @@
       variant="outlined"
       v-if="user"
       to="/dashboard/default"
+      color="primary"
     >
-      Trade Dashboard
+      Dashboard
     </v-btn>
 
     <template v-else>
@@ -28,7 +29,6 @@
       <template v-slot:activator="{ props }">
         <v-btn
           class="profileBtn text-primary"
-          color="lightprimary"
           variant="flat"
           rounded="pill"
           v-bind="props"

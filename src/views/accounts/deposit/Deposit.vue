@@ -2,12 +2,16 @@
   <v-container class="pa-6" fluid>
     <!-- Header and Deposit Button -->
     <v-row class="mb-6">
-      <v-col cols="12" class="d-flex justify-space-between align-center">
+      <v-col cols="12" md="9" class="d-flex justify-space-between align-center">
         <div>
           <h1 class="text-h4">Deposit Funds</h1>
           <div class="text-caption text-medium-emphasis">Current Balance: {{ formatCurrency(currentBalance) }}</div>
         </div>
-        <Depositor/>
+
+      </v-col>
+
+      <v-col cols="12" md="3">
+        <Depositor blocked/>
       </v-col>
 
       <v-col>
