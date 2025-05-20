@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { supabase } from '@/superbase.ts';
 import { router } from '@/router';
 import LogoDark from '@/layouts/full/logo/LogoDark.vue';
+import { allCountries } from 'country-region-data';
+
 const showRegAlert = ref(false);
 const loading = ref(false);
+
+const phone = ref('');
 
 const checkbox = ref(false);
 const show1 = ref(false);
@@ -19,6 +23,28 @@ const passwordRules = ref([
   (v: string) => (v && v.length <= 10) || 'Password must be less than 10 characters'
 ]);
 const emailRules = ref([(v: string) => !!v || 'E-mail is required', (v: string) => /.+@.+\..+/.test(v) || 'E-mail must be valid']);
+
+const emit = defineEmits(['country-selected']);
+
+const selectedCountry = ref('');
+const selectedState = ref('');
+const countryOptions = ref<string[]>([]);
+const stateOptions = ref<string[]>([]);
+
+// Setup country list on mount
+onMounted(() => {
+  countryOptions.value = allCountries.map((c) => c[0]);
+});
+
+// Watch for country change to update states
+watch(selectedCountry, (newCountry) => {
+  const found = allCountries.find((c) => c[0] === newCountry);
+  if (found) {
+    stateOptions.value = found[2].map((r) => r[0]);
+  } else {
+    stateOptions.value = [];
+  }
+});
 
 function validate() {
   Regform.value.validate();
@@ -53,7 +79,7 @@ async function createAccount() {
     loading.value = false;
     console.log('Account created successfully:', data);
     showRegAlert.value = true;
-    alert("Account created successfully");
+    alert('Account created successfully');
     await router.push('dashboard/default');
   }
 }
@@ -61,12 +87,12 @@ async function createAccount() {
 
 <template>
   <div class="d-flex justify-center">
-    <LogoDark class="mr-5"/>
+    <LogoDark class="mr-5" />
   </div>
 
   <v-card v-if="showRegAlert">
     <v-card-text class="mt-3">
-      <h2  class="text-center mb-2">Registration successful!</h2>
+      <h2 class="text-center mb-2">Registration successful!</h2>
       <v-btn variant="tonal" size="large" to="/dashboard/default" color="primary" block>login</v-btn>
     </v-card-text>
   </v-card>
@@ -108,6 +134,33 @@ async function createAccount() {
         color="primary"
       ></v-text-field>
       <v-text-field
+        v-model="phone"
+        label="Phone number"
+        class="mt-4 mb-4"
+        required
+        density="comfortable"
+        hide-details="auto"
+        variant="outlined"
+        color="primary"
+      ></v-text-field>
+      <v-select
+        v-model="selectedCountry"
+        :items="countryOptions"
+        label="Select a Country"
+        variant="outlined"
+        color="primary"
+        class="mt-4"
+      ></v-select>
+
+      <v-select
+        v-model="selectedState"
+        :items="stateOptions"
+        label="Select State / Province"
+        variant="outlined"
+        color="primary"
+        class="mt-4"
+      />
+      <v-text-field
         v-model="password"
         :rules="passwordRules"
         label="Password"
@@ -148,9 +201,9 @@ async function createAccount() {
         ></v-checkbox>
         <a href="#" class="ml-1 text-lightText">Terms and Condition</a>
       </div>
-      <v-btn :loading="loading" color="secondary" block class="mt-2" variant="flat" size="large" @click="validate()">Sign Up</v-btn>
+      <v-btn :loading="loading" color="secondary" block class="mt-2" variant="flat" size="large" @click="validate()"> Sign Up </v-btn>
     </v-form>
-    <v-alert text="Account created successfully" v-model="showRegAlert" class="mt-2" closable type="success"/>
+    <v-alert text="Account created successfully" v-model="showRegAlert" class="mt-2" closable type="success" />
     <div class="mt-5 text-right">
       <v-divider />
       <v-btn variant="plain" to="/login" class="mt-2 text-capitalize mr-n2">Already have an account?</v-btn>

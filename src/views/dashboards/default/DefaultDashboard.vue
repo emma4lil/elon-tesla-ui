@@ -21,9 +21,9 @@ var user = auth.user
       </v-card>
     </v-col>
     <v-col cols="12">
-      <v-card class="">
+      <v-card variant="text" class="">
         <v-card-text class="text-center circle sm-circle lg-circle">
-          <div class="text-h1 font-weight-bold gradient-text">Welcome, {{user?.user_metadata.first_name}}!</div>
+          <div class="text-h1 text-sm-h3 font-weight-bold gradient-text">Welcome back, {{user?.user_metadata.first_name}}!</div>
           <p>Your current balance is: <strong>$0</strong></p>
         </v-card-text>
       </v-card>
